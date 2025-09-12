@@ -1,0 +1,6 @@
+cognito_user_pool_id = "us-east-1_w7AMQFiuT"
+cognito_client_id = "7q7kcp0is36enfqebn43j04ocj"
+cognito_domain = "angelwatch-production-auth"
+dynamodb_users_table = "angelwatch-production-users"
+jwt_secret = "ekv34ZOsG6B2rXJDj2J3qrplcjzwsgGmZ0jcAHbz7ww="
+api_gateway_execution_arn = "arn:aws:execute-api:us-east-1:227830417626:xa89fa9t75/production"
