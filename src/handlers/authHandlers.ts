@@ -21,9 +21,10 @@ const createResponse = (statusCode: number, body: any): APIGatewayProxyResult =>
         statusCode,
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type,Authorization',
-            'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS'
+            'Access-Control-Allow-Origin': 'https://new.angelwatchedu.org',
+            'Access-Control-Allow-Headers': 'Content-Type,Authorization,X-Admin-User-Id',
+            'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+            'Access-Control-Allow-Credentials': 'true'
         },
         body: JSON.stringify(body)
     };
@@ -32,8 +33,32 @@ const createResponse = (statusCode: number, body: any): APIGatewayProxyResult =>
 // Helper function to parse request body
 const parseBody = (event: APIGatewayProxyEvent): any => {
     try {
-        return event.body ? JSON.parse(event.body) : {};
+        if (!event.body) {
+            return {};
+        }
+
+        let bodyString = event.body;
+        
+        // Check if the body is base64 encoded
+        if (event.isBase64Encoded) {
+            bodyString = Buffer.from(event.body, 'base64').toString('utf-8');
+        }
+
+        // Add debug logging
+        console.log('Parsing body:', {
+            isBase64Encoded: event.isBase64Encoded,
+            originalBody: event.body.substring(0, 100) + '...',
+            bodyLength: event.body.length,
+            parsedBodyLength: bodyString.length
+        });
+
+        return JSON.parse(bodyString);
     } catch (error) {
+        console.error('Error parsing body:', {
+            error: error instanceof Error ? error.message : 'Unknown error',
+            body: event.body?.substring(0, 200),
+            isBase64Encoded: event.isBase64Encoded
+        });
         throw new Error('Invalid JSON in request body');
     }
 };
@@ -320,7 +345,8 @@ export const signOutHandler = async (event: APIGatewayProxyEvent): Promise<APIGa
         console.log('Sign out request:', event);
 
         const authHeader = event.headers.Authorization || event.headers.authorization;
-        const token = jwtService.extractTokenFromHeader(authHeader);
+        // const token = jwtService.extractTokenFromHeader(authHeader); // Temporarily disabled
+        const token = null; // Temporary placeholder
 
         if (!token) {
             return createResponse(400, {

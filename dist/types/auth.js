@@ -7,5 +7,7 @@ var UserRole;
     UserRole["TEACHER"] = "teacher";
     UserRole["ADMIN"] = "admin";
     UserRole["SCHOOL_ADMIN"] = "school_admin";
+    UserRole["STATE_ADMIN"] = "state_admin";
+    UserRole["SYSTEM_ADMIN"] = "system_admin";
 })(UserRole || (exports.UserRole = UserRole = {}));
 //# sourceMappingURL=auth.js.map

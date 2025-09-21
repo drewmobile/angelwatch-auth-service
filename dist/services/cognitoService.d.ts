@@ -16,5 +16,6 @@ export declare class CognitoService {
     private setUserPassword;
     private generateTemporaryPassword;
     private mapCognitoUser;
+    resetUserPassword(email: string, newPassword: string): Promise<void>;
 }
 //# sourceMappingURL=cognitoService.d.ts.map

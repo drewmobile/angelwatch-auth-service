@@ -112,7 +112,9 @@ class JwtService {
             [auth_1.UserRole.STUDENT]: 1,
             [auth_1.UserRole.TEACHER]: 2,
             [auth_1.UserRole.SCHOOL_ADMIN]: 3,
-            [auth_1.UserRole.ADMIN]: 4
+            [auth_1.UserRole.STATE_ADMIN]: 4,
+            [auth_1.UserRole.ADMIN]: 4,
+            [auth_1.UserRole.SYSTEM_ADMIN]: 5
         };
         const userRoleLevel = roleHierarchy[tokenPayload.role] || 0;
         const requiredRoleLevel = roleHierarchy[requiredRole] || 0;

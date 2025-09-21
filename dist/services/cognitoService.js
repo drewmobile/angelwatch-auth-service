@@ -203,6 +203,33 @@ class CognitoService {
             }
         };
     }
+    async resetUserPassword(email, newPassword) {
+        try {
+            const listUsersCommand = new client_cognito_identity_provider_1.ListUsersCommand({
+                UserPoolId: this.userPoolId,
+                Filter: `email = "${email}"`
+            });
+            const listUsersResult = await this.client.send(listUsersCommand);
+            if (!listUsersResult.Users || listUsersResult.Users.length === 0) {
+                throw new Error('User not found');
+            }
+            const user = listUsersResult.Users[0];
+            if (!user.Username) {
+                throw new Error('User username not found');
+            }
+            const setPasswordCommand = new client_cognito_identity_provider_1.AdminSetUserPasswordCommand({
+                UserPoolId: this.userPoolId,
+                Username: user.Username,
+                Password: newPassword,
+                Permanent: true
+            });
+            await this.client.send(setPasswordCommand);
+        }
+        catch (error) {
+            console.error('Error resetting user password:', error);
+            throw error;
+        }
+    }
 }
 exports.CognitoService = CognitoService;
 //# sourceMappingURL=cognitoService.js.map

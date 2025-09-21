@@ -156,7 +156,9 @@ export class JwtService {
             [UserRole.STUDENT]: 1,
             [UserRole.TEACHER]: 2,
             [UserRole.SCHOOL_ADMIN]: 3,
-            [UserRole.ADMIN]: 4
+            [UserRole.STATE_ADMIN]: 4,
+            [UserRole.ADMIN]: 4,
+            [UserRole.SYSTEM_ADMIN]: 5
         };
 
         const userRoleLevel = roleHierarchy[tokenPayload.role] || 0;

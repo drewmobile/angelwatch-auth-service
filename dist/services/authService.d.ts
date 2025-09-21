@@ -1,4 +1,4 @@
-import { User, AuthRequest, RegisterRequest, AuthResponse, PasswordResetRequest, PasswordResetConfirm, ChangePasswordRequest, UpdateProfileRequest } from '../types/auth';
+import { User, AuthRequest, RegisterRequest, AuthResponse, PasswordResetRequest, PasswordResetConfirm, ChangePasswordRequest, UpdateProfileRequest, SystemStats, School, UserActivity, SupportTicket, CreateSystemAdminRequest } from '../types/auth';
 export declare class AuthService {
     private cognitoService;
     private dynamoService;
@@ -18,5 +18,24 @@ export declare class AuthService {
         user: User;
         tokenPayload: any;
     } | null>;
+    getSystemStats(): Promise<SystemStats>;
+    getAllSchools(): Promise<School[]>;
+    updateSchoolStatus(schoolId: string, isActive: boolean): Promise<School>;
+    getAllUsersWithActivity(): Promise<UserActivity[]>;
+    updateUserStatus(userId: string, isActive: boolean): Promise<User>;
+    getSupportTickets(): Promise<SupportTicket[]>;
+    updateSupportTicket(ticketId: string, status: string, assignedTo?: string): Promise<SupportTicket>;
+    createSystemAdmin(request: CreateSystemAdminRequest): Promise<User>;
+    getSchoolById(schoolId: string): Promise<School | null>;
+    getSchoolTeachers(schoolId: string): Promise<any[]>;
+    createTeacher(teacherData: {
+        email: string;
+        firstName: string;
+        lastName: string;
+        schoolId: string;
+        role: string;
+    }): Promise<User>;
+    resetUserPassword(userId: string, newPassword: string): Promise<void>;
+    getProspectsByState(stateCode: string): Promise<any[]>;
 }
 //# sourceMappingURL=authService.d.ts.map

@@ -1,5 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
 import { registerHandler, loginHandler, getProfileHandler, updateProfileHandler, changePasswordHandler, forgotPasswordHandler, confirmPasswordResetHandler, refreshTokenHandler, signOutHandler, deleteAccountHandler, corsHandler } from './handlers/authHandlers';
+import { adminResetPasswordHandler, adminForcePasswordChangeHandler, getManagedUsersHandler, manageSchoolAssignmentHandler, getAdminManagedSchoolsHandler, getAvailableSchoolsHandler } from './handlers/adminPasswordResetHandlers';
+import { getVideosHandler, getVideoHandler, getQuizzesHandler, getQuizHandler, submitQuizHandler, getCoursesHandler, getCourseHandler } from './handlers/contentHandlers';
 export declare const handler: (event: APIGatewayProxyEvent, context: Context) => Promise<APIGatewayProxyResult>;
-export { registerHandler, loginHandler, getProfileHandler, updateProfileHandler, changePasswordHandler, forgotPasswordHandler, confirmPasswordResetHandler, refreshTokenHandler, signOutHandler, deleteAccountHandler, corsHandler };
+export { registerHandler, loginHandler, getProfileHandler, updateProfileHandler, changePasswordHandler, forgotPasswordHandler, confirmPasswordResetHandler, refreshTokenHandler, signOutHandler, deleteAccountHandler, corsHandler, getVideosHandler, getVideoHandler, getQuizzesHandler, getQuizHandler, submitQuizHandler, getCoursesHandler, getCourseHandler, adminResetPasswordHandler, adminForcePasswordChangeHandler, getManagedUsersHandler, manageSchoolAssignmentHandler, getAdminManagedSchoolsHandler, getAvailableSchoolsHandler };
 //# sourceMappingURL=index.d.ts.map
